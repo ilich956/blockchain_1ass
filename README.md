@@ -23,7 +23,6 @@ In this task, we manually implement asymmetric encryption without relying on pre
 #### Example Code
 
 ```javascript
-// Sample code for key pair generation and encryption/decryption
 const { publicKey, privateKey } = generateKeyPair();
 const encryptedData = encrypt('Wussup', publicKey);
 const decryptedData = decrypt(encryptedData, privateKey);
