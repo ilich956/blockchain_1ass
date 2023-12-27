@@ -1,6 +1,13 @@
 const crypto = require('crypto');
 
-const privateKey= ''
+function generateKeyPair() {
+    const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+        modulusLength: 2048,
+        publicKeyEncoding: { type: 'spki', format: 'pem' },
+        privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+    });
+    return { publicKey, privateKey };
+}
 
 function sign(data, privateKey) {
     const sign = crypto.createSign('SHA256');
@@ -15,6 +22,8 @@ function verify(data, signature, publicKey) {
     verify.end();
     return verify.verify(publicKey, signature, 'base64');
 }
+
+const { publicKey, privateKey } = generateKeyPair();
 
 const dataToSign = 'Hello, World!';
 const signature = sign(dataToSign, privateKey);
